@@ -10,13 +10,13 @@ BookRouter.get('/', async(req, res) => {
 BookRouter.get('/:id', (req, res) => {
     Book.findById(req.params.id, (err, book) => {
         if (err) throw err;
-        res.json({status: 200, books})
+        res.json({status: 200, book})
     })
 })
 
 BookRouter.post('/', (req, res) => {
-    console.log(`name: ${req.params.name}`)
-    Book.findOne({ name: req.body.name, ISBN: false}, async(err, book) => {
+    console.log(`title: ${req.params.title}`)
+    Book.findOne({ title: req.body.title, ISBN: false}, async(err, book) => {
         if (err) throw err;
         if (!book){
             const newBook = new Book(req.body);
