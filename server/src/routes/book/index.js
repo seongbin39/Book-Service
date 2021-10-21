@@ -15,14 +15,14 @@ BookRouter.get('/:id', (req, res) => {
 })
 
 BookRouter.post('/', (req, res) => {
-    console.log(`title: ${req.params.title}`)
+    console.log(`title: ${req.body.title}`)
     Book.findOne({ title: req.body.title, ISBN: false}, async(err, book) => {
         if (err) throw err;
         if (!book){
             const newBook = new Book(req.body);
             await newBook.save().then( () => {
                 console.log('Saved done !!')
-                req.json({ status:201, msg: 'New book created in DB !!', newBook})
+                res.json({ status:201, msg: 'New book created in DB !!', newBook})
             })
         }else{
             const msg = 'This book already exists in DB !!';
