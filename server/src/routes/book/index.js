@@ -16,7 +16,7 @@ BookRouter.get('/:id', (req, res) => {
 
 BookRouter.post('/', (req, res) => {
     console.log(`name: ${req.params.name}`)
-    Book.findOne({ name: req.body.name, done: false}, async(err, book) => {
+    Book.findOne({ name: req.body.name, ISBN: false}, async(err, book) => {
         if (err) throw err;
         if (!book){
             const newBook = new Book(req.body);
